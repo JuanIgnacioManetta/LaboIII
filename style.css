@@ -1,18 +1,51 @@
-*{
-  padding: 0;
+/* Import Google font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+* {
   margin: 0;
-  background-color: grey;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
-p{
-  color: white;
-  margin: 5px 10px 5px 10px; 
+:root {
+  --text-color: #FFFFFF;
+  --icon-color: #ACACBE;
+  --icon-hover-bg: #5b5e71;
+  --placeholder-color: #dcdcdc;
+  --outgoing-chat-bg: #343541;
+  --incoming-chat-bg: #444654;
+  --outgoing-chat-border: #343541;
+  --incoming-chat-border: #444654;
+}
+.light-mode {
+  --text-color: #343541;
+  --icon-color: #a9a9bc;
+  --icon-hover-bg: #f1f1f3;
+  --placeholder-color: #6c6c6c;
+  --outgoing-chat-bg: #FFFFFF;
+  --incoming-chat-bg: #F7F7F8;
+  --outgoing-chat-border: #FFFFFF;
+  --incoming-chat-border: #D9D9E3;
+}
+body {
+  background: var(--outgoing-chat-bg);
 }
 
-.user{
+/* Chats container estilos */
+
+/* Typing container estilos */
+.typing-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   display: flex;
-  justify-content: right;
+  padding: 20px 10px;
+  justify-content: center;
+  background: var(--outgoing-chat-bg);
+  border-top: 1px solid var(--incoming-chat-border);
 }
-.ia{
+.typing-container .typing-content {
   display: flex;
-  justify-content: left;
+  max-width: 950px;
+  width: 100%;
+  align-items: flex-end;
 }

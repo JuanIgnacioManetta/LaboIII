@@ -32,6 +32,8 @@ const loadDataFromLocalstorage = () => {
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
 }
 
+loadDataFromLocalstorage();
+
 const createChatElement = (content, className) => {
     const chatDiv = document.createElement("div");
     chatDiv.classList.add("chat", className);
@@ -115,11 +117,32 @@ const handleOutgoingChat = () => {
 // boton eliminar, tema, ancho de input, espacio y el copy.
 
 deleteButton.addEventListener("click", () => {
-  if(confirm("Seguro queres eliminar todo el chat?")) {
-      localStorage.removeItem("all-chats");
-      loadDataFromLocalstorage();
-  }
+    if(confirm("Seguro queres eliminar todo el chat?")) {
+        localStorage.removeItem("all-chats");
+        loadDataFromLocalstorage();
+    }
 });
 
-loadDataFromLocalstorage();
-sendButton.addEventListener("click", handleOutgoingChat);
+themeButton.addEventListener("click", () => {
+    document.body.classList.toggle("light-mode");
+    localStorage.setItem("themeColor", themeButton.innerText);
+    themeButton.innerText = document.body.classList.contains("light-mode") ? "dark_mode" : "light_mode";
+});
+
+chatInput.addEventListener("input", () => {
+    chatInput.style.height =  `${initialInputHeight}px`;
+    chatInput.style.height = `${chatInput.scrollHeight}px`;
+});
+
+chatInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+        e.preventDefault();
+        handleOutgoingChat();
+    }
+});
+const copyResponse = (copyBtn) => {
+    const reponseTextElement = copyBtn.parentElement.querySelector("p");
+    navigator.clipboard.writeText(reponseTextElement.textContent);
+    copyBtn.textContent = "done";
+    setTimeout(() => copyBtn.textContent = "content_copy", 1000);
+}

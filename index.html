@@ -1,28 +1,61 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <title>ElDiegoBot</title>
-    <script type="module" src="main.js"></script>
-  </head>
-  <body>
-    <div class="chat-container"></div>
-    
-    <!-- Typing contenedor -->
-    <div class="typing-container">
-      <div class="typing-content">
-        <div class="typing-textarea">
-          <textarea id="chat-input" spellcheck="false" placeholder="Escriba Aqui" required></textarea>
-          <span id="send-btn" class="material-symbols-rounded">send</span>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style-index.css">
+    <title>ArgenBot</title>
+    <style>
+        
+    </style>
+</head>
+<body class="body">
+    <header class="header" >
+        <img src="images/robot.png" alt="">
+        <h1>ArgenBot</h1>
+    </header>
+    <main class="main">
+      <div class="container-description">
+        <h3>Charlas con Leyendas Argentinas: Messi, Maradona, Mirtha y Fort</h3>
+        <p>¡Converse con leyendas argentinas y figuras icónicas en nuestro sitio interactivo! Descubra y charle con bots diseñados para capturar la esencia y el estilo de personalidades como Messi, Maradona, Mirtha Legrand y Ricardo Fort. Desde la genialidad futbolística hasta el glamour televisivo, sumérjase en conversaciones únicas y aprenda más sobre estos íconos que han dejado una marca indeleble en la cultura argentina. ¡Explore, converse y diviértase en nuestra plataforma de charlas con personajes famosos de Argentina!</p>
+      </div>  
+      <div class="container-card">
+        <div class="card">
+            <a href="fort.html">
+                <img src="images/fort.jpg" alt="">
+                <div class="info">
+                    <h3>Ricardo Fort Bot</h3>
+                </div>
+            </a>
         </div>
-        <div class="typing-controls">
-          <span id="theme-btn" class="material-symbols-rounded">light_mode</span>
-          <span id="delete-btn" class="material-symbols-rounded">delete</span>
+        <div class="card">
+            <a href="messi.html">
+                <img src="images/messi.jpg" alt="">
+                <div class="info">
+                    <h3>Lionel Messi Bot</h3>
+                </div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="legrand.html">
+                <img src="images/mirthalegrand.jpg" alt="">
+                <div class="info">
+                    <h3>Mirtha Legrand Bot</h3>
+                </div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="maradona.html">
+                <img src="images/maradona.jpg" alt="">
+                <div class="info">
+                    <h3>Diego Maradona Bot</h3>
+                </div>
+            </a>
+        </div>
       </div>
-    </div>
-  </body>
+    </main>
+    <footer class="footer">
+        <h3>Creada por: Ignacio Menna, Juan Manetta y Fausto Pulido</h3>
+    </footer>
+</body>
 </html>

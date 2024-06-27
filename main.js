@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-const apiKey1 = import.meta.env.VITE_API_KEY1;
-const apiKey2 = import.meta.env.VITE_API_KEY2;
-const apiKey3 = import.meta.env.VITE_API_KEY3;
+const apiKey1 = "AIzaSyCTVnyDpBA9cdgYoKCKpTHiTv_GYDPLvXE";
+const apiKey2 = "AIzaSyD-2x4yTz6M6n3aXsQ9J5vZDzJjF3cR8F0";
+const apiKey3 = "AIzaSyB-8l0kQ4w2a3bZk1z9m4Mf5Jd0ZqK0Z2U";
 
 //Verifica cual bot esta en uso y asigna variables
 const bot = document.querySelector('body');

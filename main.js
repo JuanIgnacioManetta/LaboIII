@@ -64,6 +64,25 @@ const deleteButton = document.querySelector("#delete-btn");
 let userText = null;
 const API_KEY = genAI.apiKey;
 
+//Copia el texto de respuesta del chatbot
+const copyResponse = (copyBtn) => {
+    const reponseTextElement = copyBtn.parentElement.querySelector("p");
+    navigator.clipboard.writeText(reponseTextElement.textContent);
+    copyBtn.textContent = "done";
+    setTimeout(() => copyBtn.textContent = "content_copy", 1000);
+}
+//Envia el mensaje del usuario al presionar el boton de enviar
+sendButton.addEventListener("click", () => {
+    handleOutgoingChat();
+});
+
+//Copia el texto de respuesta del chatbot al presionar el boton de copiar
+chatContainer.addEventListener("click", (e) => {
+    if (e.target.classList.contains("material-symbols-rounded")) {
+        copyResponse(e.target);
+    }
+});
+
 //Carga los datos del chat desde el localstorage
 const loadDataFromLocalstorage = () => {
     const themeColor = localStorage.getItem("themeColor");
@@ -198,21 +217,3 @@ chatInput.addEventListener("keydown", (e) => {
     }
 });
 
-//Copia el texto de respuesta del chatbot
-const copyResponse = (copyBtn) => {
-    const reponseTextElement = copyBtn.parentElement.querySelector("p");
-    navigator.clipboard.writeText(reponseTextElement.textContent);
-    copyBtn.textContent = "done";
-    setTimeout(() => copyBtn.textContent = "content_copy", 1000);
-}
-//Envia el mensaje del usuario al presionar el boton de enviar
-sendButton.addEventListener("click", () => {
-    handleOutgoingChat();
-});
-
-//Copia el texto de respuesta del chatbot al presionar el boton de copiar
-chatContainer.addEventListener("click", (e) => {
-    if (e.target.classList.contains("material-symbols-rounded")) {
-        copyResponse(e.target);
-    }
-});

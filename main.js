@@ -95,6 +95,8 @@ const showTypingAnimation = () => {
     getChatResponse(incomingChatDiv);
 }
 
+
+const copyBtn = document.querySelector(".material-symbols-rounded");
 const initialInputHeight = chatInput.scrollHeight;
 
 //Maneja el chat saliente del usuario
@@ -148,7 +150,7 @@ chatInput.addEventListener("keydown", (e) => {
     }
 });
 
-//Copia el texto de respuesta del chatbot al portapapeles del usuario
+//Copia el texto de respuesta del chatbot
 const copyResponse = (copyBtn) => {
     const reponseTextElement = copyBtn.parentElement.querySelector("p");
     navigator.clipboard.writeText(reponseTextElement.textContent);
@@ -159,5 +161,12 @@ const copyResponse = (copyBtn) => {
 //Envia el mensaje del usuario al presionar el boton de enviar
 sendButton.addEventListener("click", () => {
     handleOutgoingChat();
+});
+
+//Copia el texto de respuesta del chatbot al presionar el boton de copiar
+chatContainer.addEventListener("click", (e) => {
+    if (e.target.classList.contains("material-symbols-rounded")) {
+        copyResponse(e.target);
+    }
 });
 

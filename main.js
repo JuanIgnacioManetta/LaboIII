@@ -2,7 +2,6 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 const apiKey1 = import.meta.env.VITE_API_KEY1;
 const apiKey2 = import.meta.env.VITE_API_KEY2;
 const apiKey3 = import.meta.env.VITE_API_KEY3;
-// Access your API key as an environment variable (see "Set up your API key" above)
 
 //Verifica cual bot esta en uso y asigna variables
 const bot = document.querySelector('body');
@@ -56,8 +55,6 @@ const chat = model.startChat({
     history: [],
 });
   
-
-
 const chatInput = document.querySelector("#chat-input");
 const sendButton = document.querySelector("#send-btn");
 const chatContainer = document.querySelector(".chat-container");
@@ -67,7 +64,7 @@ const deleteButton = document.querySelector("#delete-btn");
 let userText = null;
 const API_KEY = genAI.apiKey;
 
-
+//Carga los datos del chat desde el localstorage
 const loadDataFromLocalstorage = () => {
     const themeColor = localStorage.getItem("themeColor");
 
@@ -85,6 +82,7 @@ const loadDataFromLocalstorage = () => {
 
 loadDataFromLocalstorage();
 
+//Crea un elemento de chat
 const createChatElement = (content, className) => {
     const chatDiv = document.createElement("div");
     chatDiv.classList.add("chat", className);
@@ -92,6 +90,7 @@ const createChatElement = (content, className) => {
     return chatDiv;
 }
 
+//Obtiene la respuesta del chatbot
 const getChatResponse = async (incomingChatDiv) => {
     prompt = userText;  // Usamos el texto del usuario como prompt para generar contenido
 
@@ -129,6 +128,7 @@ const getChatResponse = async (incomingChatDiv) => {
   }
 }
 
+//Muestra la animacion de escritura
 const showTypingAnimation = () => {
   const html = `<div class="chat-content">
   <div class="chat-details">
@@ -150,6 +150,7 @@ const showTypingAnimation = () => {
 
 const initialInputHeight = chatInput.scrollHeight;
 
+//Maneja el chat saliente
 const handleOutgoingChat = () => {
   userText = chatInput.value.trim();
   if(!userText) return;
@@ -171,8 +172,6 @@ const handleOutgoingChat = () => {
   setTimeout(showTypingAnimation, 500);
 }
 
-// boton eliminar, tema, ancho de input, espacio y el copy.
-
 deleteButton.addEventListener("click", () => {
     if(confirm("Seguro queres eliminar todo el chat?")) {
         localStorage.removeItem("all-chats");
@@ -186,6 +185,7 @@ themeButton.addEventListener("click", () => {
     themeButton.innerText = document.body.classList.contains("light-mode") ? "dark_mode" : "light_mode";
 });
 
+//Ajusta la altura del input de chat
 chatInput.addEventListener("input", () => {
     chatInput.style.height =  `${initialInputHeight}px`;
     chatInput.style.height = `${chatInput.scrollHeight}px`;
@@ -197,6 +197,8 @@ chatInput.addEventListener("keydown", (e) => {
         handleOutgoingChat();
     }
 });
+
+//Copia el texto de respuesta del chatbot
 const copyResponse = (copyBtn) => {
     const reponseTextElement = copyBtn.parentElement.querySelector("p");
     navigator.clipboard.writeText(reponseTextElement.textContent);

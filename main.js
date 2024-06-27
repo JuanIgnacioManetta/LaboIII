@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenerativeAI } from "@google/generative-ai";
 const apiKey1 = import.meta.env.VITE_API_KEY1;
 const apiKey2 = import.meta.env.VITE_API_KEY2;
 const apiKey3 = import.meta.env.VITE_API_KEY3;

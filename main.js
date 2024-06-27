@@ -1,5 +1,5 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-// Access your API key as an environment variable (see "Set up your API key" above)
+
 const genAI = new GoogleGenerativeAI("AIzaSyCTVnyDpBA9cdgYoKCKpTHiTv_GYDPLvXE");
 
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
@@ -17,6 +17,7 @@ const chat = model.startChat({
   history: [],
 });
 
+//Carga los datos del chatbot desde el almacenamiento local
 const loadDataFromLocalstorage = () => {
     const themeColor = localStorage.getItem("themeColor");
 
@@ -34,6 +35,7 @@ const loadDataFromLocalstorage = () => {
 
 loadDataFromLocalstorage();
 
+//Crea un elemento de chat
 const createChatElement = (content, className) => {
     const chatDiv = document.createElement("div");
     chatDiv.classList.add("chat", className);
@@ -41,6 +43,7 @@ const createChatElement = (content, className) => {
     return chatDiv;
 }
 
+//Obtiene la respuesta del chatbot
 const getChatResponse = async (incomingChatDiv) => {
   const prompt = userText;  // Usamos el texto del usuario como prompt para generar contenido
 
@@ -72,6 +75,7 @@ const getChatResponse = async (incomingChatDiv) => {
   }
 }
 
+//Muestra la animacion de tipeo
 const showTypingAnimation = () => {
   const html = `<div class="chat-content">
   <div class="chat-details">
@@ -93,29 +97,29 @@ const showTypingAnimation = () => {
 
 const initialInputHeight = chatInput.scrollHeight;
 
+//Maneja el chat saliente del usuario
 const handleOutgoingChat = () => {
-  userText = chatInput.value.trim();
-  if(!userText) return;
-  
-  chatInput.value = "";
-  chatInput.style.height = `${initialInputHeight}px`;
-  
-  const html = `<div class="chat-content">
-  <div class="chat-details">
-  <img src="images/user.jpg" alt="user-img">
-  <p>${userText}</p>
-  </div>
-  </div>`;
-  
-  const outgoingChatDiv = createChatElement(html, "outgoing");
-  chatContainer.querySelector(".default-text")?.remove();
-  chatContainer.appendChild(outgoingChatDiv);
-  chatContainer.scrollTo(0, chatContainer.scrollHeight);
-  setTimeout(showTypingAnimation, 500);
+    userText = chatInput.value.trim();
+    if (!userText) return;
+    
+    chatInput.value = "";
+    chatInput.style.height = `${initialInputHeight}px`;
+    
+    const html = `<div class="chat-content">
+    <div class="chat-details">
+    <img src="images/user.jpg" alt="user-img">
+    <p>${userText}</p>
+    </div>
+    </div>`;
+    
+    const outgoingChatDiv = createChatElement(html, "outgoing");
+    chatContainer.querySelector(".default-text")?.remove();
+    chatContainer.appendChild(outgoingChatDiv);
+    chatContainer.scrollTo(0, chatContainer.scrollHeight);
+    setTimeout(showTypingAnimation, 500);
 }
 
-// boton eliminar, tema, ancho de input, espacio y el copy.
-
+//Elimina todo el historial del chat
 deleteButton.addEventListener("click", () => {
     if(confirm("Seguro queres eliminar todo el chat?")) {
         localStorage.removeItem("all-chats");
@@ -123,26 +127,37 @@ deleteButton.addEventListener("click", () => {
     }
 });
 
+//Cambia el tema de la interfaz de usuario
 themeButton.addEventListener("click", () => {
     document.body.classList.toggle("light-mode");
     localStorage.setItem("themeColor", themeButton.innerText);
     themeButton.innerText = document.body.classList.contains("light-mode") ? "dark_mode" : "light_mode";
 });
 
+//Ajusta la altura del input de acuerdo al contenido ingresado
 chatInput.addEventListener("input", () => {
     chatInput.style.height =  `${initialInputHeight}px`;
     chatInput.style.height = `${chatInput.scrollHeight}px`;
 });
 
+//Envia el mensaje del usuario al presionar la tecla Enter
 chatInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+    if (e.key === "Enter" && !e.shiftKey) {
         e.preventDefault();
         handleOutgoingChat();
     }
 });
+
+//Copia el texto de respuesta del chatbot al portapapeles del usuario
 const copyResponse = (copyBtn) => {
     const reponseTextElement = copyBtn.parentElement.querySelector("p");
     navigator.clipboard.writeText(reponseTextElement.textContent);
     copyBtn.textContent = "done";
     setTimeout(() => copyBtn.textContent = "content_copy", 1000);
 }
+
+//Envia el mensaje del usuario al presionar el boton de enviar
+sendButton.addEventListener("click", () => {
+    handleOutgoingChat();
+});
+

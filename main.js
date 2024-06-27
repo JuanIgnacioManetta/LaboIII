@@ -1,4 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
+const apiKey1 = import.meta.env.VITE_API_KEY1;
+const apiKey2 = import.meta.env.VITE_API_KEY2;
+const apiKey3 = import.meta.env.VITE_API_KEY3;
 // Access your API key as an environment variable (see "Set up your API key" above)
 
 //Verifica cual bot esta en uso y asigna variables
@@ -41,7 +44,7 @@ if(bot.attributes["prompt-id"].value == "maradona"){
 }
 
 //Genera el bot y lo configura
-const apis = ["AIzaSyCTVnyDpBA9cdgYoKCKpTHiTv_GYDPLvXE", "AIzaSyD-2x4yTz6M6n3aXsQ9J5vZDzJjF3cR8F0", "AIzaSyB-8l0kQ4w2a3bZk1z9m4Mf5Jd0ZqK0Z2U"];
+const apis = [apiKey1, apiKey2, apiKey3];
 let indice = 0;
 let genAI = new GoogleGenerativeAI(apis[indice]);
 
